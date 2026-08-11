@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Imperial Ai Agent</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <img class="imperialLogo" src="logo.png"  alt="Imperial Roads Logo">
+        <div id="appContainer">
+            <section id="inputScreen">
+                <header class="screenHeader">
+                    <h1>Imperial Ai Agent</h1>
+                    <p>Paste the client email below.</p>
+                </header>
+                <main>
+                    <div class="inputContainer">
+                        <label for="emailInput">Client E-mail</label>
+                        <textarea
+                            id="emailInput"
+                            class="textInput"
+                            placeholder="Paste the client's email here..."></textarea>
+                        <button id="analyzeBtn">Analyze Email</button>
+                    </div>
+                </main>
+            </section>
+            <section id="resultSection" class="hidden">
+                <header class="itineraryHeader">
+                    <h1>Analysis Result</h1>
+                </header>
+                <main>
+                    <div class="itineraryContainer">
+                        
+                    </div>
+                    <div class="actionButtons">
+
+                    </div>
+                </main>
+            </section>
+        </div>
+       <script src="script.js"></script>
+    </body>
+</html>
