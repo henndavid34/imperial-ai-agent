@@ -5,32 +5,6 @@ const inputScreen = document.getElementById("inputScreen");
 const dayCardTitle = document.querySelector(".dayCardTitle");
 const itineraryContainer = document.querySelector(".itineraryContainer");
 
-const aiResponse = `[
-    {
-        "title": "Day 1 - Singapore → Milan",
-        "rows": [
-            {
-                "place": "Milan Airport",
-                "time": "09:30",
-                "schedule": "Meet & greet by local guide",
-                "distance": "50 km"
-            }
-        ]
-    },
-    {
-        "title": "Day 2 - Milan → Lake Garda",
-        "rows": [
-            {
-                "place": "Milan",
-                "time": "Morning",
-                "schedule": "Depart for Lake Garda",
-                "distance": "140 km"
-            }
-        ]
-    }
-]`;
-
-const itinerary = JSON.parse(aiResponse);
 
 const tableHeaders = [
     "Place",
@@ -62,7 +36,8 @@ analyzeBtn.addEventListener("click",  async function () {
     });
     const data = await response.json();
     console.log(data);
-    itinerary.forEach(function(day) {
+    const parsedData = JSON.parse(data.itinerary);
+    parsedData.itinerary.forEach(function(day) {
     renderDay(day);
     });
     resultSection.classList.remove("hidden");
@@ -95,8 +70,16 @@ function renderDay(day){
         const tableRow = document.createElement("tr");
         const placeCell = document.createElement("td");
         const timeCell = document.createElement("td");
+        timeCell.classList.add("estimatedCell");
+        timeCell.style.display = "flex";
+        timeCell.style.alignItems = "center";
+        timeCell.style.gap = "4px";
         const scheduleCell = document.createElement("td");
         const distanceCell = document.createElement("td");
+        distanceCell.classList.add("estimatedCell");
+        distanceCell.style.display = "flex";
+        distanceCell.style.alignItems = "center";
+        distanceCell.style.gap = "4px";
         tableRow.appendChild(placeCell);
         tableRow.appendChild(timeCell);
         tableRow.appendChild(scheduleCell);
@@ -110,6 +93,11 @@ function renderDay(day){
         timeInput.classList.add("tableInput");
         timeInput.type = "text";
         timeInput.value = row.time;
+        if (row.estimatedFields.includes("time")) {
+            const warning = document.createElement("span");
+            warning.textContent = "!";
+            timeCell.appendChild(warning);
+        }
         timeCell.appendChild(timeInput);
         const scheduleInput = document.createElement("textarea");
         scheduleInput.classList.add("tableTextarea");
@@ -119,6 +107,11 @@ function renderDay(day){
         distanceInput.classList.add("tableInput");
         distanceInput.type = "text";
         distanceInput.value = row.distance;
+        if (row.estimatedFields.includes("distance")) {
+            const warning = document.createElement("span");
+            warning.textContent = "!";
+            distanceCell.appendChild(warning);
+        }
         distanceCell.appendChild(distanceInput);
         itineraryBody.appendChild(tableRow); 
     });

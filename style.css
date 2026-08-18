@@ -21,6 +21,10 @@ body {
 }
 .screenHeader{
     margin-bottom: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 #inputScreen{
     margin-top: 50px;
