@@ -15,8 +15,10 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "docxtemplater": "^3.69.3",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "openai": "^7.4.0"
+    "openai": "^7.4.0",
+    "pizzip": "^3.2.0"
   }
 }

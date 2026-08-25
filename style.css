@@ -81,3 +81,24 @@ body {
     display: flex;
     justify-content: center;
 }
+.actionButtons {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+#generateWordBtn {
+    background: #1f5ea8;
+    color: white;
+    border: 2px solid #1f5ea8;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#generateWordBtn:hover {
+    background: white;
+    color: #1f5ea8;
+}

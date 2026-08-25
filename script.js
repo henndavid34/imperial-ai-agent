@@ -4,6 +4,9 @@ const resultSection = document.getElementById("resultSection");
 const inputScreen = document.getElementById("inputScreen");
 const dayCardTitle = document.querySelector(".dayCardTitle");
 const itineraryContainer = document.querySelector(".itineraryContainer");
+const generateBtn = document.getElementById("generateWordBtn");
+
+let currentItinerary = null;
 
 
 const tableHeaders = [
@@ -37,11 +40,31 @@ analyzeBtn.addEventListener("click",  async function () {
     const data = await response.json();
     console.log(data);
     const parsedData = JSON.parse(data.itinerary);
+    currentItinerary = parsedData;
     parsedData.itinerary.forEach(function(day) {
     renderDay(day);
     });
     resultSection.classList.remove("hidden");
     inputScreen.classList.add("hidden");
+});
+
+generateBtn.addEventListener("click", async function(){
+    console.log(currentItinerary);
+    const response = await fetch("/generate-word",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+        itinerary: currentItinerary
+        })
+    });
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "generated_offer.docx";
+    a.click();
 });
 
 function renderDay(day){
